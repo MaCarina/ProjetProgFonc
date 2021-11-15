@@ -2,7 +2,10 @@
 open Graph
 
 (* assert false is of type ∀α.α, so the type-checker is happy. *)
-let rec clone_nodes (gr:'a graph) = function
-	|[] -> []
-	|(a,b)::rest -> (a,None)::(clone_nodes rest)
-let gmap gr f = assert false
+let clone_nodes (gr:'a graph) = 
+    (*créer un graphe vide, parcourir le graphe donné en argument grâce à un itérateur et ajouter les 
+    noeuds au nouveau graphe*)
+    n_fold gr (new_node empty_graph id) empty_graph
+    
+let gmap gr f = 
+    e_fold gr (f )
