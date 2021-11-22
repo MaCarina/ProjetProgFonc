@@ -112,3 +112,22 @@ let from_file path =
   close_in infile ;
   final_graph
   
+let export path graph =
+  
+
+  (* Open a write-file. *)
+  let ff = open_out path in
+
+  (* Write in this file. *)
+  fprintf ff "%% This is a graph.\n\n" ;
+  fprintf ff "rankdir=LR;\n";
+	fprintf ff "size=8,5\n";
+	fprintf ff "node [shape = circle];\n";
+
+  (* Write all arcs *)
+  let _ = e_fold graph (fun acu id1 id2 lbl -> fprintf ff "%d -> %d [label = %s];\n" id1 id2 lbl) () in
+  
+  fprintf ff "\n%% End of graph\n" ;
+  
+  close_out ff ;
+  ()

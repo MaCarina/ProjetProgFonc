@@ -31,14 +31,13 @@ let () =
 
   (*graph est un string graph*)
   (*gmap du string graph pour avoir un int graph attendu dans add_arc*)
-  let node1 = 0 
+  (*let node1 = 0 
   and node2 = 3 
   and n = 8 in
-  let graph = gmap (add_arc (gmap graph int_of_string) node1 node2 n) string_of_int  in
-
+  let graph = gmap (add_arc (gmap graph int_of_string) node1 node2 n) string_of_int  in*)
 
   (* Rewrite the graph that has been read. *)
   let () = write_file outfile graph in
 
-  ()
-
+  ();
+  export outfile graph;
