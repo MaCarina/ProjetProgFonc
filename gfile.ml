@@ -119,15 +119,14 @@ let export path graph =
   let ff = open_out path in
 
   (* Write in this file. *)
-  fprintf ff "%% This is a graph.\n\n" ;
+  fprintf ff "digraph finite_state_machine {\n";
   fprintf ff "rankdir=LR;\n";
-	fprintf ff "size=8,5\n";
+	fprintf ff "size=\"8,5\"\n";
 	fprintf ff "node [shape = circle];\n";
 
   (* Write all arcs *)
   let _ = e_fold graph (fun acu id1 id2 lbl -> fprintf ff "%d -> %d [label = %s];\n" id1 id2 lbl) () in
   
-  fprintf ff "\n%% End of graph\n" ;
-  
+  fprintf ff "}";
   close_out ff ;
   ()

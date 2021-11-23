@@ -1,5 +1,6 @@
-digraph finite_state_machine {rankdir=LR;
-size=8,5
+digraph finite_state_machine {
+rankdir=LR;
+size="8,5"
 node [shape = circle];
 4 -> 5 [label = 14];
 1 -> 5 [label = 21];
