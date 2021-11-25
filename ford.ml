@@ -15,10 +15,12 @@ let rec trouver_chemin graph node1 node2 file =
             (*vérifier si on trouve un chemin par là ou non*)
             match liste_voisins with
                 |[] -> []
-                |x::rest -> if (trouver_chemin graph x node2 (x::file))=[] then parcours_voisins rest
-                            else (trouver_chemin graph x node2 (x::file)) (*à modifier*)
-            (*appel à parcours_voisins*)
-            (*finir la fonction rec en syntaxe*)
+                |x::rest -> 
+                    let chemin = trouver_chemin graph x node2 (x::file) in
+                    if chemin=[] then parcours_voisins rest
+                    else chemin
+        in
+        parcours_voisins voisins
 
 let calcul_variation_flot chemin = assert false
     (*calcule la variation de flot d'un chemin*)
