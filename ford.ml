@@ -22,14 +22,21 @@ let rec trouver_chemin graph node1 node2 file =
         in
         parcours_voisins voisins
 
-let calcul_variation_flot chemin = assert false
+let rec calcul_variation_flot graph chemin =
     (*calcule la variation de flot d'un chemin*)
+    let min_chemin = Some 100 in
+    match chemin with 
+        |[] -> min_chemin
+        |x::y::rest -> 
+            let min_arc = find_arc graph x y in (*de type option*)
+            if min_arc > min_chemin then min_chemin = min_arc; calcul_variation_flot graph (y::rest)
 
 let maj_graphe_flot graph chemin flot = assert false
 
-let algo_ford graph = assert false
+let algo_ford graph node1 node2 =
     (*chercher un chemin de s à p dans graphe
     calculer la variation de flot de ce chemin
     mettre à jour le graphe de flot
     mettre à jour D = D + var_flot
     while jusqu'à ce qu'il n'y est plus de chemin*)
+    trouver_chemin graph node1 node2 []
