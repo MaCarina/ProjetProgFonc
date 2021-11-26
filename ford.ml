@@ -1,26 +1,42 @@
-type D = int (*Flot de débit*)
+open Graph
+open Tools
 
-let init graph = 
+let init graph = assert false
     (*initialiser les flots et D à O*)
-    clone_nodes(graph)
-    gmap(gr,fun label->0) (* Soucis ici je pense parce qu'on met une valeur sur un arc et non pas un truc au format .../...*)
-    let D = 0 (*par définition D vaut 0 puisque tout les flots vallent 0*)
 
-let trouver_chemin graph node1 node2 = assert false
-    
+let rec trouver_chemin graph node1 node2 file =
+    (*y a pas encore node1 dans file au début*)
+    (* parcours en profondeur*)
+    if node1=node2 then node1::file
+    else
+        let voisins = out_arcs graph node1 in
+        let rec parcours_voisins liste_voisins =
+            (*vision récursive de la liste de voisins*)
+            (*vérifier si on trouve un chemin par là ou non*)
+            match liste_voisins with
+                |[] -> []
+                |x::rest -> 
+                    let chemin = trouver_chemin graph x node2 (x::file) in
+                    if chemin=[] then parcours_voisins rest
+                    else chemin
+        in
+        parcours_voisins voisins
 
-let calcul_variation_flot chemin = assert false
+let rec calcul_variation_flot graph chemin =
     (*calcule la variation de flot d'un chemin*)
-    (*On fait la somme, pour chaque noeud, des flots entrants flots + (capacité - flot sortant) *)
-
+    let min_chemin = Some 100 in
+    match chemin with 
+        |[] -> min_chemin
+        |x::y::rest -> 
+            let min_arc = find_arc graph x y in (*de type option*)
+            if min_arc > min_chemin then min_chemin = min_arc; calcul_variation_flot graph (y::rest)
 
 let maj_graphe_flot graph chemin flot = assert false
-    (*On remplace les flots du chemin choisi en incrémentant ce chemin du plus petit flot du chemin*)
 
-
-let algo_ford graph = assert false
+let algo_ford graph node1 node2 =
     (*chercher un chemin de s à p dans graphe
     calculer la variation de flot de ce chemin
     mettre à jour le graphe de flot
     mettre à jour D = D + var_flot
     while jusqu'à ce qu'il n'y est plus de chemin*)
+    trouver_chemin graph node1 node2 []
