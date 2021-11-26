@@ -1,4 +1,6 @@
-val init: 'a graphe -> 'b graph
+open Graph
+
+val init: 'a graph -> 'b graph
 
 val trouver_chemin: 'a graph -> id -> id -> 'b list
 
