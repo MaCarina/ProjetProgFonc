@@ -1,5 +1,8 @@
 open Gfile
 open Tools
+open Ford
+open List
+open String
     
 let () =
 
@@ -22,8 +25,8 @@ let () =
   and outfile = Sys.argv.(4)
   
   (* These command-line arguments are not used for the moment. *)
-  and _source = int_of_string Sys.argv.(2)
-  and _sink = int_of_string Sys.argv.(3)
+  and source = int_of_string Sys.argv.(2)
+  and sink = int_of_string Sys.argv.(3)
   in
 
   (* Open file *)
@@ -35,9 +38,14 @@ let () =
   and node2 = 3 
   and n = 8 in
   let graph = gmap (add_arc (gmap graph int_of_string) node1 node2 n) string_of_int  in*)
+  let graph = gmap graph int_of_string in
+  let liste = trouver_chemin graph source sink [] in
+  let liste_string = List.map string_of_int liste in
+  let chaine = String.concat "," liste_string in
+  Printf.printf "Le chemin est : %s\n" chaine
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile graph in
+  (*let () = write_file outfile graph in
 
   ();
-  export outfile graph;
+  export outfile graph;*)
