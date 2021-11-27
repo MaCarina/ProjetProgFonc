@@ -47,17 +47,12 @@ let rec calcul_variation_flot graph chemin =
             if min_arc > min_chemin then min_chemin = min_arc,
             if min_arc > min_chemin then calcul_variation_flot graph (y::rest)
 
-<<<<<<< HEAD
 let maj_graphe_flot graph chemin flot =
     match chemin with
         |[] -> graph
         |x::rest -> 
             let arcs_sortants x = 
     add_arc graph ... ... flot
-=======
-let maj_graphe_flot graph chemin flot = assert false
-(*On remplace les flots du chemin choisi en incrémentant ce chemin du plus petit flot du chemin*)
->>>>>>> aaa249e48e125e99ac00232ee5c07a0175b4902e
 
 let algo_ford graph node1 node2 =
     (*Débit de flot*) (*sera un argument de la fonction qu'on donnera à 0 au début et qui bouge à chaque éxécution*)
