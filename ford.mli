@@ -1,4 +1,9 @@
 open Graph
+<<<<<<< HEAD
+=======
+
+val init: 'a graph -> 'b graph
+>>>>>>> aaa249e48e125e99ac00232ee5c07a0175b4902e
 
 val init: 'a graph -> 'b graph
 

@@ -11,7 +11,7 @@ let empty_graph = []
 
 let node_exists gr id = List.mem_assoc id gr
 
-let out_arcs gr id =
+let out_arcs gr id = (*voisins d'un arc*) 
   try List.assoc id gr
   with Not_found -> raise (Graph_error ("Node " ^ string_of_int id ^ " does not exist in this graph."))
 
