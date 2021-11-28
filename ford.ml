@@ -4,8 +4,8 @@ open Tools
 let init graph =
     (*initialiser les flots et D à O*)
     let gr = clone_nodes(graph)
-    gmap gr (fun label -> "0"^"/"^string_of_int(label)) (* Soucis ici je pense parce qu'on met une valeur sur un arc et non pas un truc au format .../...*)
-    (*ça va renvonvoyer un string graphe*) 
+    gmap gr (fun label -> "0"^"/"^string_of_int(label))
+    (*ça va renvoyer un string graphe*) 
 
 let rec trouver_chemin graph node1 node2 file =
     (*y a pas encore node1 dans file au début*)
@@ -42,6 +42,7 @@ let rec calcul_variation_flot graph chemin =
     let min_chemin = Some 100 in
     match chemin with 
         |[] -> min_chemin
+        |x::[] -> min_chemin 
         |x::y::rest -> 
             let min_arc = find_arc graph x y in (*de type option*)
             if min_arc > min_chemin then min_chemin = min_arc,
