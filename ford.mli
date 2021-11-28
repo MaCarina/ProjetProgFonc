@@ -1,7 +1,7 @@
 open Graph
-
-val init: 'a graph -> 'b graph
-
+(*
+val init: 'a graph -> 'a graph
+*)
 val trouver_chemin: int graph -> id -> id -> int list -> int list
 (*
 val calcul_variation_flot: 'a graph -> 'b list -> int 

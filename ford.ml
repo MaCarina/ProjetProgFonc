@@ -1,40 +1,34 @@
 open Graph
 open Tools
-
+(*
 let init graph =
     (*initialiser les flots et D à O*)
-    let gr = clone_nodes(graph)
+    let gr = clone_nodes(graph) in
     gmap gr (fun label -> "0"^"/"^string_of_int(label)) (* Soucis ici je pense parce qu'on met une valeur sur un arc et non pas un truc au format .../...*)
     (*ça va renvonvoyer un string graphe*) 
-
+*)
 let rec trouver_chemin graph node1 node2 file =
-    (*y a pas encore node1 dans file au début*)
+    (*on met node1 dans la file au début*)
     (* parcours en profondeur*)
     (*pb si boucle*)
-    let rec boucle file = utiliser List.mem elt list au lieu de toute la boucle
-        match file with
-            |[] -> false
-            |a::rest -> if a=node1 then true
-                        else boucle rest
-    in
-    if (boucle file) then passer au suivant, ignorer ceux qu'on a déjà vu 
+    if node1=node2 then file
     else
-        if node1=node2 then node1::file
-        else
-            let voisins = out_arcs graph node1 in
-            let rec parcours_voisins liste_voisins =
-                (*vision récursive de la liste de voisins*)
-                (*vérifier si on trouve un chemin par là ou non*)
-                match liste_voisins with
-                    |[] -> []
-                    (*pb si label arc = 0, il ne faut pas le prendre*)
-                    |(y,0)::rest -> parcours_voisins rest
-                    |(x,_)::rest -> 
+        let voisins = out_arcs graph node1 in
+        let rec parcours_voisins liste_voisins =
+            (*vision récursive de la liste de voisins*)
+            (*vérifier si on trouve un chemin par là ou non*)
+            match liste_voisins with
+                |[] -> []
+                (*pb si label arc = 0, il ne faut pas le prendre*)
+                |(y,0)::rest -> parcours_voisins rest
+                |(x,_)::rest -> 
+                    if (List.mem x file) then parcours_voisins rest
+                    else 
                         let chemin = trouver_chemin graph x node2 (x::file) in
                         if chemin=[] then parcours_voisins rest
                         else chemin
-            in
-            parcours_voisins voisins
+        in
+        parcours_voisins voisins
 (*
 let rec calcul_variation_flot graph chemin =
     (*calcule la variation de flot d'un chemin*)
