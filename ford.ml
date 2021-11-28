@@ -36,6 +36,7 @@ let rec calcul_variation_flot graph chemin =
     let min_chemin = Some 100 in
     match chemin with 
         |[] -> min_chemin
+        |x::[] -> min_chemin 
         |x::y::rest -> 
             let min_arc = find_arc graph x y in (*de type option*)
             if min_arc > min_chemin then min_chemin = min_arc,
