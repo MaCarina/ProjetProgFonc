@@ -1,12 +1,12 @@
 open Graph
 open Tools
-(*
+
 let init graph =
     (*initialiser les flots et D à O*)
     let gr = clone_nodes(graph) in
-    gmap gr (fun label -> "0"^"/"^string_of_int(label)) (* Soucis ici je pense parce qu'on met une valeur sur un arc et non pas un truc au format .../...*)
-    (*ça va renvonvoyer un string graphe*) 
-*)
+    gmap gr (fun label -> "0"^"/"^string_of_int(label)) 
+    (*ça va renvoyer un string graphe*) 
+
 let rec trouver_chemin graph node1 node2 file =
     (*on met node1 dans la file au début*)
     (* parcours en profondeur*)
