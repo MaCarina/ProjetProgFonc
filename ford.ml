@@ -8,7 +8,8 @@ type label =
 let init graph =
     (*initialiser les flots à 0*)
     let gr = clone_nodes graph in 
-    gmap gr (fun label -> {flot : 0 ; capacite : label})
+    e_fold graph (fun gr id1 id2 element -> new_arc gr id1 id2 {flot=0 ; capacite=0}) gr
+
     (*faire 2 choses différentes, le flot et la capacité*)
     
     (*ça va renvoyer un flot_capa'graphe*) 
@@ -16,6 +17,7 @@ let init graph =
 let rec trouver_chemin graph node1 node2 file =
     (*on met node1 dans la file au début*)
     (* parcours en profondeur*)
+    (*Modifier pour ne pas explorer où flot=capa*)
     if node1 = node2 then file
     else
         let voisins = out_arcs graph node1 in
