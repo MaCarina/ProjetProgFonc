@@ -1,11 +1,16 @@
 open Graph
 open Tools
 
+type flot_capa =
+    { flot : int;
+      capacité : int }
+
 let init graph =
     (*initialiser les flots à 0*)
     let gr = clone_nodes graph in
-    gmap gr (fun label -> "0"^"/"^(string_of_int label)) 
+    (*gmap gr (fun label -> "0"^"/"^(string_of_int label)) *)
     (*faire 2 choses différentes, le flot et la capacité*)
+    
     (*ça va renvoyer un string graphe*) 
 
 let rec trouver_chemin graph node1 node2 file =
