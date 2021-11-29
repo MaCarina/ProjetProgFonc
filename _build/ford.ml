@@ -1,7 +1,7 @@
 open Graph
 open Tools
 
-type label =
+type flot_capa =
     { flot : int;
       capacite : int }
 
