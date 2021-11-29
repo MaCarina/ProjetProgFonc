@@ -2,15 +2,15 @@ open Graph
 open Tools
 
 let init graph =
-    (*initialiser les flots et D à O*)
-    let gr = clone_nodes(graph) in
-    gmap gr (fun label -> "0"^"/"^string_of_int(label)) 
+    (*initialiser les flots à 0*)
+    let gr = clone_nodes graph in
+    gmap gr (fun label -> "0"^"/"^(string_of_int label)) 
+    (*faire 2 choses différentes, le flot et la capacité*)
     (*ça va renvoyer un string graphe*) 
 
 let rec trouver_chemin graph node1 node2 file =
     (*on met node1 dans la file au début*)
     (* parcours en profondeur*)
-    (*pb si boucle*)
     if node1=node2 then file
     else
         let voisins = out_arcs graph node1 in
@@ -22,7 +22,7 @@ let rec trouver_chemin graph node1 node2 file =
                 (*pb si label arc = 0, il ne faut pas le prendre*)
                 |(y,0)::rest -> parcours_voisins rest
                 |(x,_)::rest -> 
-                    if (List.mem x file) then parcours_voisins rest
+                    if (List.mem x file) then parcours_voisins rest (*pb si boucle*)
                     else 
                         let chemin = trouver_chemin graph x node2 (x::file) in
                         if chemin=[] then parcours_voisins rest

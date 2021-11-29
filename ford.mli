@@ -1,6 +1,6 @@
 open Graph
 
-val init: 'a graph -> 'a graph
+val init: 'a graph -> 'b graph
 
 val trouver_chemin: int graph -> id -> id -> int list -> int list
 (*
