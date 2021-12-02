@@ -1,16 +1,16 @@
 open Graph
 open Tools
 
-type flot_capa =
+type label =
     { flot : int;
-      capacité : int }
+      capacite : int }
 
 let init graph =
     (*initialiser les flots à 0*)
     let gr = clone_nodes graph in
     (*gmap gr (fun label -> "0"^"/"^(string_of_int label)) *)
     (*faire 2 choses différentes, le flot et la capacité*)
-    
+    (*mettre tous les flots à 0 et toutes les capacités avec les valeurs des labels initiaux*)
     (*ça va renvoyer un string graphe*) 
 
 let rec trouver_chemin graph node1 node2 file =
@@ -44,8 +44,12 @@ let rec calcul_variation_flot graph chemin =
         |x::[] -> min_chemin 
         |x::y::rest -> 
             let min_arc = find_arc graph x y in (*de type option*)
-            if min_arc > min_chemin then min_chemin = min_arc,
+            if min_arc > min_chemin then min_chemin = min_arc
             if min_arc > min_chemin then calcul_variation_flot graph (y::rest)
+            (*récupérer le flot et la capacite*)
+            (*faire la différence entre les 2*)
+            (*comparer aux mins*)
+            (*cas où passe par un arc arrière*)
 
 let maj_graphe_flot graph chemin flot =
     match chemin with
