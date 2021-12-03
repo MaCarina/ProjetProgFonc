@@ -1,18 +1,14 @@
 open Graph
 open Tools
 
-type label =
-    { flot : int;
-      capacite : int }
-
-let init graph =
+(*let init graph =
     (*initialiser les flots à 0*)
     let gr = clone_nodes graph in 
-    e_fold graph (fun gr id1 id2 element -> new_arc gr id1 id2 {flot=0 ; capacite=0}) gr
+    e_fold graph (fun gr id1 id2 element -> new_arc gr id1 id2 (0 , 0)) gr
 
     (*faire 2 choses différentes, le flot et la capacité*)
     
-    (*ça va renvoyer un flot_capa'graphe*) 
+    (*ça va renvoyer un flot_capa'graphe*) *)
 
 let rec trouver_chemin graph node1 node2 file =
     (*on met node1 dans la file au début*)
@@ -36,8 +32,8 @@ let rec trouver_chemin graph node1 node2 file =
                         else chemin
         in
         parcours_voisins voisins
-(*
-let rec calcul_variation_flot graph chemin =
+
+(*let rec calcul_variation_flot graph chemin =
     (*calcule la variation de flot d'un chemin*)
     (*On fait la somme, pour chaque noeud, des flots entrants flots + (capacité - flot sortant) *)
     let min_chemin = Some 100 in
@@ -48,19 +44,23 @@ let rec calcul_variation_flot graph chemin =
             let min_arc = find_arc graph x y in (*de type option*)
             if min_arc > min_chemin then min_chemin = min_arc,
             if min_arc > min_chemin then calcul_variation_flot graph (y::rest)
-
-let maj_graphe_flot graph chemin flot =
+*)
+let rec maj_graphe_flot graph chemin flot =
+    (*va raugmenter de "flot" tout les flot de "chemin" dans  le "graph"*)
     match chemin with
         |[] -> graph
-        |x::rest -> 
-            let arcs_sortants x = 
-    add_arc graph ... ... flot
+        |x::[] -> graph
+    (*faire les arcs arrières, réfléchir à qui on augmente et qui on diminue. Les arcs sont orientés: id1 id2 correspond à celui de 1 vers 2*)
+        |x::y::rest -> let graphmajplus = add_arc graph x y flot in 
+                        let graphmajmoins = (maj_graphe_flot graphmajplus (y::rest) flot)  in 
+                        add_arc graph x y (-flot)
+(* de 1 vers 2 on a sur larc capa-flot et sur 2 vers 1 on met flot. Ici on veut dimuniuer le premier et augmenter le deuxième*)
 
 let algo_ford graph node1 node2 =
     (*Débit de flot*) (*sera un argument de la fonction qu'on donnera à 0 au début et qui bouge à chaque éxécution*)
     (*chercher un chemin de s à p dans graphe
-    calculer la variation de flot de ce chemin
+    calculer la variation de flot de ce chemin 
     mettre à jour le graphe de flot
     mettre à jour D = D + var_flot
     while jusqu'à ce qu'il n'y est plus de chemin*)
-    trouver_chemin graph node1 node2 []*)
+    trouver_chemin graph node1 node2 []

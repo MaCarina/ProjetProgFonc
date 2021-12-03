@@ -38,7 +38,7 @@ let () =
   and node2 = 3 
   and n = 8 in
   let graph = gmap (add_arc (gmap graph int_of_string) node1 node2 n) string_of_int  in*)
-  let graph = gmap graph int_of_string in
+  (*let graph = gmap graph int_of_string in*)
   (*let liste = trouver_chemin graph source sink (source::[]) in
   let liste_string = List.map string_of_int liste in
   let rev_liste_string = List.rev liste_string in
@@ -46,10 +46,14 @@ let () =
   Printf.printf "Le chemin est : %s\n" chaine
   *)
 
-  let graph1 = init graph in
+  let graph1 = gmap graph int_of_string in (*int-> string*)
+
+  let graph2 = Ford.init graph1 in (*string -> tuple*)
+
+  let graph3 = gmap graph2 string_of_int in (*tuple -> string*)
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile graph1 in
+  let () = write_file outfile graph3 in
 
   ();
   (*export outfile graph;*)

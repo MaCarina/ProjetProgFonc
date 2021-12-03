@@ -1,10 +1,6 @@
 open Graph
 
-type label =
-    { flot : int;
-      capacite : int }
-
-val init: 'a graph -> 'b graph
+(* val init: 'a graph -> (int*int) graph *)
 
 val trouver_chemin: int graph -> id -> id -> int list -> int list
 (*
