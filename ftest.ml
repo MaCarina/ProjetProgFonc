@@ -3,6 +3,7 @@ open Tools
 open Ford
 open List
 open String
+open Option
     
 let () =
 
@@ -38,18 +39,19 @@ let () =
   and node2 = 3 
   and n = 8 in
   let graph = gmap (add_arc (gmap graph int_of_string) node1 node2 n) string_of_int  in*)
-  let graph = gmap graph int_of_string in
-  (*let liste = trouver_chemin graph source sink (source::[]) in
+  let min_chem = 100 in
+  let graph2 = gmap graph int_of_string in
+  let liste = trouver_chemin graph2 source sink (source::[]) in
+  let rev_liste_int = List.rev liste in
   let liste_string = List.map string_of_int liste in
   let rev_liste_string = List.rev liste_string in
   let chaine = String.concat "," rev_liste_string in
-  Printf.printf "Le chemin est : %s\n" chaine
-  *)
-
-  let graph1 = init graph in
+  Printf.printf "Le chemin est : %s\n" chaine;
+  let calcul = calcul_variation_flot graph2 rev_liste_int min_chem in
+  Printf.printf "Calcul_var_flot donne : %d\n" calcul
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile graph1 in
+  (*let () = write_file outfile graph1 in
 
   ();
-  (*export outfile graph;*)
+  (*export outfile graph;*)*)
