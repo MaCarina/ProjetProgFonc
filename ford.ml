@@ -2,16 +2,6 @@ open Graph
 open Tools
 open Option
 
-(*
-let init graph =
-    (*initialiser les flots à 0*)
-    let gr = clone_nodes graph in 
-    e_fold graph (fun gr id1 id2 element -> new_arc gr id1 id2 (0,0)) gr
-
-    (*faire 2 choses différentes, le flot et la capacité*)
-    
-    (*ça va renvoyer un flot_capa'graphe*) 
-*)
 let rec trouver_chemin graph node1 node2 file =
     (*on met node1 dans la file au début*)
     (* parcours en profondeur*)
@@ -54,12 +44,14 @@ let maj_graphe_flot graph chemin flot =
         |x::rest -> 
             let arcs_sortants x = 
     add_arc graph ... ... flot
-
-let algo_ford graph node1 node2 =
-    (*Débit de flot*) (*sera un argument de la fonction qu'on donnera à 0 au début et qui bouge à chaque éxécution*)
+*)
+let rec algo_ford graph node1 node2 =
     (*chercher un chemin de s à p dans graphe
     calculer la variation de flot de ce chemin
     mettre à jour le graphe de flot
     mettre à jour D = D + var_flot
     while jusqu'à ce qu'il n'y est plus de chemin*)
-    trouver_chemin graph node1 node2 []*)
+    let chemin = trouver_chemin graph node1 node2 (node1::[]) in
+    let rev_chemin = List.rev chemin in
+    let calcul = calcul_variation_flot graph rev_chemin 100 in
+    let maj = maj_graphe_flot graph rev_chemin calcul in
