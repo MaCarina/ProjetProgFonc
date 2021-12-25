@@ -49,12 +49,6 @@ let rec maj_graphe_flot graph chemin flot =
 (* de 1 vers 2 on a sur larc capa-flot et sur 2 vers 1 on met flot. Ici on veut dimuniuer le premier et augmenter le deuxième*)
 
 let algo_ford graph node1 node2 =
-    (*Débit de flot*) (*sera un argument de la fonction qu'on donnera à 0 au début et qui bouge à chaque éxécution*)
-    (*chercher un chemin de s à p dans graphe
-    calculer la variation de flot de ce chemin 
-    mettre à jour le graphe de flot
-    mettre à jour D = D + var_flot
-    while jusqu'à ce qu'il n'y est plus de chemin*)
     let rec boucle graph =
         let chemin = trouver_chemin graph node1 node2 (node1::[]) in
         match chemin with
@@ -85,6 +79,11 @@ let transfo graph_ford node1 node2 =
         boucle clone_graph
 
 let transfo graph_ford =
-    let clone_graph = clone_nodes graph_ford in
+    let graph_transfo = clone_nodes graph_ford in
     let rec boucle graph =
-        e_fold 
+        let lab = find_arc graph_ford x y in
+        match lab with
+        |None -> boucle graph_transfo
+        |Some l -> boucle (new_arc graph_transfo x y l)
+    in
+        boucle graph_transfo
