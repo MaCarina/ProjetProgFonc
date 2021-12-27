@@ -60,7 +60,7 @@ let algo_ford graph node1 node2 =
                 boucle maj
     in 
         boucle graph
-
+(*
 let transfo graph_ford node1 node2 =
     let clone_graph = clone_nodes graph_ford in
     let rec boucle graph =
@@ -78,12 +78,27 @@ let transfo graph_ford node1 node2 =
     in
         boucle clone_graph
 
-let transfo graph_ford =
+let transfo graph_ford node =
     let graph_transfo = clone_nodes graph_ford in
-    let rec boucle graph =
-        let lab = find_arc graph_ford x y in
-        match lab with
-        |None -> boucle graph_transfo
-        |Some l -> boucle (new_arc graph_transfo x y l)
+    let rec boucle graph node1 =
+        let y = out_arcs graph node1 in
+        let rec parcours voisins =
+            match voisins with
+            |[] -> []
+            |(x,l)::rest -> boucle (new_arc graph node1 y l) y
+                (*let lab = find_arc graph_ford node1 x in
+                match lab with
+                |None -> boucle graph y
+                |Some l -> boucle (new_arc graph node1 y l) y*)
     in
-        boucle graph_transfo
+        boucle graph_transfo node
+*)
+let transfo graph_ford node =
+    let graph_transfo = clone_nodes graph_ford in
+    let y = out_arcs graph_transfo node in
+    let rec boucle graph node1 =
+        match y with
+        |[] -> []
+        |(x,l)::rest -> boucle (new_arc graph node1 x l) x
+    in
+        boucle graph_transfo node
