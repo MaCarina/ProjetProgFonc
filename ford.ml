@@ -78,6 +78,7 @@ let transfo graph_ford node1 node2 =
     in
         boucle clone_graph
 
+        (*On veut transformer un graphe d'écart en graphe des flots *)
 let transfo graph_ford =
     let graph_transfo = clone_nodes graph_ford in
     let rec boucle graph =
