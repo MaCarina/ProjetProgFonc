@@ -61,30 +61,12 @@ let algo_ford graph node1 node2 =
     in 
         boucle graph
 
-let transfo graph_ford node1 node2 =
-    let clone_graph = clone_nodes graph_ford in
-    let rec boucle graph =
-        let chemin = trouver_chemin graph node1 node2 (node1::[]) in
-        match chemin with
-            |[] -> graph
-            |x::[] -> graph
-        (*faire les arcs arrières, réfléchir à qui on augmente et qui on diminue. Les arcs sont orientés: id1 id2 correspond à celui de 1 vers 2*)
-            |x::y::rest -> 
-                let arc_ford = find_arc graph y x in
-                match arc_ford with
-                    |None -> graph
-                    |Some a -> let graph_flot = add_arc clone_graph x y arc_ford in 
-                            boucle graph_flot
-    in
-        boucle clone_graph
-
-        (*On veut transformer un graphe d'écart en graphe des flots *)
-let transfo graph_ford =
-    let graph_transfo = clone_nodes graph_ford in
-    let rec boucle graph =
-        let lab = find_arc graph_ford x y in
-        match lab with
-        |None -> boucle graph_transfo
-        |Some l -> boucle (new_arc graph_transfo x y l)
-    in
-        boucle graph_transfo
+        (*On veut transformer un graphe d'écart en graphe de flots*)
+let transfo graph_ford graph_transfo = (*graph_ford = graph initial et graph_transfo = graph après fonction ford*)
+    e_fold graph_ford (fun graph node1 node2 m ->
+        match (find_arc graph_transfo node1 node2) with
+        |None -> failwith "arc non trouvé"
+        |Some l -> if ((m-l) >= 0) then new_arc graph node1 node2 l
+                    else new_arc graph node1 node2 m
+    )
+    (clone_nodes graph_ford)

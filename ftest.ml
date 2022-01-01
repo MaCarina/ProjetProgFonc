@@ -51,7 +51,8 @@ let () =
   let calcul = calcul_variation_flot graph2 rev_liste_int min_chem in
   Printf.printf "Calcul_var_flot donne : %d\n" calcul;
   let maj = maj_graphe_flot graph2 rev_liste_int calcul in*)
-  let string_maj = gmap algo string_of_int in
+  let algo_transfo = transfo graph2 algo in
+  let string_maj = gmap algo_transfo string_of_int in
   (* Rewrite the graph that has been read. *)
   let () = write_file outfile string_maj in
 
