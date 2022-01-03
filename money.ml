@@ -18,7 +18,7 @@ let recup_name file graph = (*le graph est vide au lancement*)
         let line = input_line infile in
         let (n2, names2, graph2) =
            match (line) with
-              | name::_::_ -> (n+1, (name,int_of_string(d))::names, new_node graph n)
+              | name::_::_ -> (n+1, (name)::names, new_node graph n)
         in
         loop n2 names2 graph2 (* On aura le nombre de personne, les noms sous forme de liste et le graphe associé*)
      with End_of_file -> (List.rev(names),graph) (*ce que ça nous renvoit à la fin*)
