@@ -1,11 +1,32 @@
-open Str
 open Graph
-open Tools
 open Ford
+open List
 
+(*Fonction qui lit dans le fichier money et renvoie la liste des sommes payées*)
+let rec lecture fichier =
+   let channel = open_in fichier in
+   (*
+   let rec lecture_recursive ligne =
+      try
+         let ligne = input_line channel in
+         Printf.printf "%s\n" ligne
+      with
+         End_of_file -> ligne 
+   in
+      let lignes = lecture_recursive in
+      let _ = close_in_noerr channel in
+      List.rev (lignes);;*)
+   let a = input_value channel in
+   Printf.printf "%s\n" a
 
 (*Fonction qui avec un fichier money renvoie la somme totale payée*)
-
+(*let somme_totale fichier =
+   let fich = from_file fichier in (*fich est un fichier string*)
+   let r file = In_channel.read_lines fich in
+   Printf.printf ff "dans le fichier il y a : %s" r
+   assert false
+*)
+   
 (*Fonction qui calcule ce qui devait être payé par chacun*)
 
 (*Fonction qui calcule la différence entre ce qui a été payé et ce qui devait être payé pour chacun*)
@@ -20,7 +41,7 @@ open Ford
 
 
 
-
+(*
 let sort_negat ff names debt id1 id2 =
    match (current_flow debt id1 id2) with
       | Some c -> if c <= 0 
@@ -33,8 +54,8 @@ let print_arcs ff names debt id1 id2 lbl =
       | 0,n,f -> Printf.fprintf ff "\"source\" -> \"%s\" [label = \"%s\"];\n" names.((n-2)) (string_of_flow f)
       | n,1,f -> Printf.fprintf ff "\"%s\" -> \"target\" [label = \"%s\"];\n" names.((n-2)) (string_of_flow f)
       | n1,n2,_ -> sort_negat ff names debt n1 n2
-
-
+*)
+(*
 let export_debt (path: string) ((names,debt): (string array * flow graph)) =
 
   (* Open a write-file. *)
@@ -50,3 +71,4 @@ let export_debt (path: string) ((names,debt): (string array * flow graph)) =
   
   close_out ff ;
   ()
+  *)

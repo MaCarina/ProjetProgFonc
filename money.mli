@@ -11,6 +11,7 @@
    
    (**************  ALGORITHM  **************)
    (* Echanges de paiements et recherche du flot de débit de chacun *)
+   (*
    val debt : string -> (string array * flow graph)
    (* Export *)
-   val export_debt : string -> (string array * flow graph) -> unit
+   val export_debt : string -> (string array * flow graph) -> unit*)
