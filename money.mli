@@ -1,4 +1,4 @@
- (* Nous calculons l'argent que ce doivent 2 personnes et pour cela nous lisons les différents paiement qui les relient*)
+ (* Nous calculons l'argent que se doivent 2 personnes et pour cela nous lisons les différents paiement qui les relient*)
 
 (* Notre format de fichier pour l'utiliser:  :
    Name1 MoneyPaid1\n

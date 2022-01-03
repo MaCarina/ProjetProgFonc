@@ -4,28 +4,21 @@ open Tools
 open Ford
 
 
-(*Fonction qui avec un chemin et un graph donné renvoie la liste des noms du graph*)
+(*Fonction qui avec un fichier money renvoie la somme totale payée*)
+
+(*Fonction qui calcule ce qui devait être payé par chacun*)
+
+(*Fonction qui calcule la différence entre ce qui a été payé et ce qui devait être payé pour chacun*)
+
+(*Fonction qui récupère tous les noms des personnes impliquées dans le fichier money et les met sous forme de liste*)
+
+(*Fonction qui crée un graphe avec les noms des personnes issus de la liste précédente*)
+
+(*Fonction qui crée des arcs de capacité infinie entre chaque noeud*)
+
+(*Fonction qui change le flot en fonction des remboursements d'argent calculés*)
 
 
-(* Fonction qui relie le neoud à la source ou la destination en fonction de leur débit individuel*)
-
-
-(* Rajouter un arc du bon flot sur les autres arcs *)
-
-
-(* Relier tout les aitres noeuds avec le bon flot *)
-
-
-   (* Création source et destination *)
-  
-
-   (* Calcul de chaque débit *)
-
-
-   (* lien source/dest *)
-   
-
-   (* autres liens *)
 
 
 let sort_negat ff names debt id1 id2 =
