@@ -19,7 +19,7 @@ ocamlbuild ftest_money.byte
 ### Usage
 ```bash
 ./ftest.byte fichier_source source_graph puit_graph fichier_final
-./ftest.byte fichier.txt
+./ftest_money.byte fichier.txt
 ```
 ## Maintainers
 - [Carina Malleville](https://github.com/MaCarina)
