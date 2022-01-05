@@ -8,26 +8,6 @@ open Option
 open Scanf
 
 (*Fonction qui lit dans le fichier money et renvoie la liste des sommes payées*)
-(*let lecture fichier =
-   let channel = open_in fichier in
-   let rec lecture_recursive ligne acu =
-      try
-         let ligne = input_line channel in
-         let ligne = split ligne in
-         let lecture_ligne ligne =
-            match ligne with
-            |[] -> acu
-            |_::[] -> acu
-            |""::_ -> acu
-            |nom::somme::_ -> (somme::acu)
-         in
-         lecture_recursive ligne acu
-      with
-         End_of_file -> ligne 
-   in
-      let lignes = lecture_recursive [] [] in
-      List.rev (lignes);
-      close_in channel*)
 let lecture fichier =
    let channel = open_in fichier in
    let rec lecture_recursive ligne =
@@ -40,12 +20,12 @@ let lecture fichier =
    close_in channel;
    List.rev (List.map int_of_string ligne)
 
-let rec help liste fin =
+let rec split liste fin =
    match liste with
    |[] -> liste
    |x::rest -> 
       let elt = split (regexp "[ \t]+") x in 
-      help rest (elt::fin)
+      split rest (elt::fin)
 
 let rec extraction_somme liste acu =
    match liste with
@@ -56,13 +36,12 @@ let rec extraction_somme liste acu =
 let affichage liste =
    List.map (fun x -> Printf.printf "%d" x) liste
 
-(*Fonction qui avec un fichier money renvoie la somme totale payée*)
-(*let somme_totale fichier =
-   let fich = from_file fichier in (*fich est un fichier string*)
-   let r file = In_channel.read_lines fich in
-   Printf.printf ff "dans le fichier il y a : %s" r
-   assert false
-*)
+(*Fonction qui calcule la somme totale payée avec les int d'une liste*)
+let rec somme_totale liste somme =
+   match liste with
+   |[] -> somme
+   |a::[] -> somme_totale [] (a+somme)
+   |b::rest -> somme_totale rest (b+somme)
    
 (*Fonction qui calcule ce qui devait être payé par chacun*)
 
@@ -88,7 +67,7 @@ let affichage liste =
 
 
 
-(*
+
 let sort_negat ff names debt id1 id2 =
    match (current_flow debt id1 id2) with
       | Some c -> if c <= 0 
@@ -101,8 +80,7 @@ let print_arcs ff names debt id1 id2 lbl =
       | 0,n,f -> Printf.fprintf ff "\"source\" -> \"%s\" [label = \"%s\"];\n" names.((n-2)) (string_of_flow f)
       | n,1,f -> Printf.fprintf ff "\"%s\" -> \"target\" [label = \"%s\"];\n" names.((n-2)) (string_of_flow f)
       | n1,n2,_ -> sort_negat ff names debt n1 n2
-*)
-(*
+
 let export_debt (path: string) ((names,debt): (string array * flow graph)) =
 
   (* Open a write-file. *)
@@ -118,4 +96,3 @@ let export_debt (path: string) ((names,debt): (string array * flow graph)) =
   
   close_out ff ;
   ()
-  *)
