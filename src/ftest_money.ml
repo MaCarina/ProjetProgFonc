@@ -3,6 +3,8 @@ open Ford
 open List
 open String
 open Option
+open Gfile
+open Tools
 
 
 let () =
@@ -17,5 +19,8 @@ let () =
 
     let infile = Sys.argv.(1) in
     let lignes = Money.lecture infile in
-
+    let h = Money.help lignes [] in
+    (*let line = Money.extraction_somme lignes [] in*)
+    let chaine = String.concat "," h in
+    Printf.printf "La liste est : %s\n" chaine;
     ();
