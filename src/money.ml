@@ -48,19 +48,17 @@ let rec somme_totale liste somme =
 (*Fonction qui calcule la différence entre ce qui a été payé et ce qui devait être payé pour chacun*)
 
 (*Fonction qui récupère tous les noms des personnes impliquées dans le fichier money et les met sous forme de liste + Création du graphe associé*)
-(*let recup_name file graph = (*le graph est vide au lancement*)
-  let infile = open_in file in
-  let rec loop n names graph =
-     try
-        let line = input_line infile in
-        let (n2, names2, graph2) =
-           match (line) with
-              | name::_::_ -> (n+1, (name)::names, new_node graph n)
-        in
-        loop n2 names2 graph2 (* On aura le nombre de personne, les noms sous forme de liste et le graphe associé*)
-     with End_of_file -> (List.rev(names),graph) (*ce que ça nous renvoit à la fin*)
-     close_in infile;
-*)
+let recup_name file graph = (*le graph est vide au lancement*)
+   let liste = lecture file in
+   let liste_split = split liste [] in
+   let rec extraction_nom list acu =
+      match list with
+      |[] -> acu
+      |(a,_)::[] -> extraction_nom [] (a::acu)
+      |(b,_)::rest -> extraction_nom rest (b::acu)
+   in
+   ...
+
 (*Fonction qui crée des arcs de capacité infinie entre chaque noeud*)
 
 (*Fonction qui change le flot en fonction des remboursements d'argent calculés*)
