@@ -13,11 +13,13 @@ git clone https://github.com/MaCarina/ProjetProgFonc
 ```
 ### Test
 ```bash
-Commande pour les tests à mettre
+ocamlbuild ftest.byte
+ocamlbuild ftest_money.byte
 ```
 ### Usage
 ```bash
-commande pour la compilation et l'éxécution à mettre 
+./ftest.byte fichier_source source_graph puit_graph fichier_final
+./ftest.byte fichier.txt
 ```
 ## Maintainers
 - [Carina Malleville](https://github.com/MaCarina)
