@@ -15,7 +15,8 @@
    val extraction_somme: ('a*'b) list -> 'b list -> 'b list
    val affichage: int list -> unit list
    val somme_totale: int list -> int -> int
-   val recup_name: string -> string graph ->  
+   val recup_name: string -> string list
+   val creation_graphe: string list -> string graph -> string graph
    (* Echanges de paiements et recherche du flot de débit de chacun *)
    (*
    val debt : string -> (string array * flow graph)

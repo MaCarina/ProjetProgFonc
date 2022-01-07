@@ -48,16 +48,22 @@ let rec somme_totale liste somme =
 (*Fonction qui calcule la différence entre ce qui a été payé et ce qui devait être payé pour chacun*)
 
 (*Fonction qui récupère tous les noms des personnes impliquées dans le fichier money et les met sous forme de liste + Création du graphe associé*)
-let recup_name file graph = (*le graph est vide au lancement*)
+let recup_name file = (*le graph est vide au lancement*)
    let liste = lecture file in
    let liste_split = split liste [] in
    let rec extraction_nom list acu =
       match list with
       |[] -> acu
-      |(a,_)::[] -> extraction_nom [] (a::acu)
+      |(a,_)::[] -> (a::acu)
       |(b,_)::rest -> extraction_nom rest (b::acu)
    in
-   ...
+   extraction_nom liste_split []
+
+let rec creation_graphe liste graph =
+   match liste with
+   |[] -> graph
+   |a::[] -> Graph.new_node graph a
+   |b::rest -> creation_graphe rest (Graph.new_node graph b)
 
 (*Fonction qui crée des arcs de capacité infinie entre chaque noeud*)
 
