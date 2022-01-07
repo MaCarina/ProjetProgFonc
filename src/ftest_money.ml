@@ -23,7 +23,7 @@ let () =
     (*let line = Money.extraction_somme lignes [] in*)
     let chaine = String.concat "," h in
     Printf.printf "La liste est : %s\n" chaine;*)
-    let liste = [10;10;40] in
+    (*let liste = [10;10;40] in
     let somme = somme_totale liste 0 in
-    Printf.printf "la somme est : %d" somme;
+    Printf.printf "la somme est : %d" somme;*)
     ();

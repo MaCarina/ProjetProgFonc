@@ -8,7 +8,7 @@ open Option
 open Scanf
 
 (*Fonction qui lit dans le fichier money et renvoie la liste des sommes payées*)
-let lecture fichier =
+(*let lecture fichier =
    let channel = open_in fichier in
    let rec lecture_recursive ligne =
       try
@@ -18,23 +18,31 @@ let lecture fichier =
    in
    let ligne = lecture_recursive [] in
    close_in channel;
-   List.rev (List.map int_of_string ligne)
+   List.rev (List.map int_of_string ligne)*)
 
+let lecture fichier =
+   let channel = open_in fichier in
+   try
+      let line = input_line channel in
+      print_endline line;
+      close_in channel
+   with End_of_file ->
+      close_in channel
+      (*pb avec line qui est un string.t*)
+(*
 let rec split liste fin =
    match liste with
    |[] -> liste
    |x::rest -> 
       let elt = split (regexp "[ \t]+") x in 
       split rest (elt::fin)
-
+*)
 let rec extraction_somme liste acu =
    match liste with
    |[] -> acu
    |(_,a)::[] -> extraction_somme [] (a::acu)
    |(_,b)::rest -> extraction_somme rest (b::acu)
 
-let affichage liste =
-   List.map (fun x -> Printf.printf "%d" x) liste
 
 (*Fonction qui calcule la somme totale payée avec les int d'une liste*)
 let rec somme_totale liste somme =
@@ -48,7 +56,7 @@ let rec somme_totale liste somme =
 (*Fonction qui calcule la différence entre ce qui a été payé et ce qui devait être payé pour chacun*)
 
 (*Fonction qui récupère tous les noms des personnes impliquées dans le fichier money et les met sous forme de liste + Création du graphe associé*)
-let recup_name file = (*le graph est vide au lancement*)
+(*let recup_name file = (*le graph est vide au lancement*)
    let liste = lecture file in
    let liste_split = split liste [] in
    let rec extraction_nom list acu =
@@ -58,20 +66,20 @@ let recup_name file = (*le graph est vide au lancement*)
       |(b,_)::rest -> extraction_nom rest (b::acu)
    in
    extraction_nom liste_split []
-
+*)(*
 let rec creation_graphe liste graph =
    match liste with
    |[] -> graph
    |a::[] -> Graph.new_node graph a
    |b::rest -> creation_graphe rest (Graph.new_node graph b)
-
+*)
 (*Fonction qui crée des arcs de capacité infinie entre chaque noeud*)
 
 (*Fonction qui change le flot en fonction des remboursements d'argent calculés*)
 
 
 
-
+(*
 let sort_negat ff names debt id1 id2 =
    match (current_flow debt id1 id2) with
       | Some c -> if c <= 0 
@@ -99,4 +107,4 @@ let export_debt (path: string) ((names,debt): (string array * flow graph)) =
   Printf.fprintf ff "\n}" ;
   
   close_out ff ;
-  ()
+  ()*)
