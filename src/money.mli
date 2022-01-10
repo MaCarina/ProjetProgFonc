@@ -10,6 +10,7 @@
    open Ford
    
    (**************  ALGORITHM  **************)
+   val affichage: string list -> unit list
    val lecture: string -> unit(*string list*)
    (*val split: string list -> string list -> string list*)
    val extraction_somme: ('a*'b) list -> 'b list -> 'b list

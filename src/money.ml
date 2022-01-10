@@ -20,15 +20,21 @@ open Scanf
    close_in channel;
    List.rev (List.map int_of_string ligne)*)
 
+ let affichage liste =
+   List.map (fun x -> Printf.printf "elt : %s, " x) liste
+
 let lecture fichier =
    let channel = open_in fichier in
    try
       let line = input_line channel in
-      print_endline line;
+      (*let ligne = Str.regexp "\\([A-Za-z]+\\)" in line*)
+      (*print_endline line;*)
+      Printf.printf "%s\n" line;
+      let sub = String.split_on_char ' ' line in (*sub est la liste de chaque elt séparé par un espace dans le fichier*)
+      affichage sub;
       close_in channel
    with End_of_file ->
       close_in channel
-      (*pb avec line qui est un string.t*)
 (*
 let rec split liste fin =
    match liste with
