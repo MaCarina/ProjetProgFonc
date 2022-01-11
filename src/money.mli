@@ -12,7 +12,6 @@
    (**************  ALGORITHM  **************)
    val affichage: string list -> unit list
    val lecture: string -> string list
-   (*val split: string list -> string list -> string list*)
    val extraction_somme: string list -> string list -> string list
    val extraction_nom: string list -> string list -> string list
    val somme_totale: int list -> int -> int

@@ -30,6 +30,7 @@ let extraction_somme liste liste_somme =
    let liste_s = filter (fun x -> x<"9999") liste in
    liste_s
 
+(*Fonction qui récupère tous les noms des personnes impliquées dans le fichier money et les met sous forme de liste*)
 let extraction_nom liste liste_nom =
    let liste_n = filter (fun x -> (x>"A") && (x<"Z")) liste in
    liste_n
@@ -45,18 +46,8 @@ let rec somme_totale liste somme =
 
 (*Fonction qui calcule la différence entre ce qui a été payé et ce qui devait être payé pour chacun*)
 
-(*Fonction qui récupère tous les noms des personnes impliquées dans le fichier money et les met sous forme de liste + Création du graphe associé*)
-(*let recup_name file = (*le graph est vide au lancement*)
-   let liste = lecture file in
-   let liste_split = split liste [] in
-   let rec extraction_nom list acu =
-      match list with
-      |[] -> acu
-      |(a,_)::[] -> (a::acu)
-      |(b,_)::rest -> extraction_nom rest (b::acu)
-   in
-   extraction_nom liste_split []
-*)(*
+(*Fonction qui crée le graphe avec comme noeud les elts d'une liste*)
+(*
 let rec creation_graphe liste graph =
    match liste with
    |[] -> graph
