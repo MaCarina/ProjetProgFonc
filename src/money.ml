@@ -42,7 +42,7 @@ let rec somme_totale liste somme =
    |a::[] -> somme_totale [] (a+somme)
    |b::rest -> somme_totale rest (b+somme)
    
-(*Fonction qui calcule ce qui devait être payé par chacun*)
+
 
 (*Fonction qui calcule la différence entre ce qui a été payé et ce qui devait être payé pour chacun*)
 
@@ -58,6 +58,13 @@ let rec creation_graphe liste graph =
 
 (*Fonction qui change le flot en fonction des remboursements d'argent calculés*)
 
+(* Fonction qui calcule ce qui devait être payé par chacun *)
+let m = (List.fold_left somme_totale extraction_nom 0)/(List.length extraction_nom) in
+let dette_perso = List.map (fun (n,d) -> (n,(d-m))) extraction_nom in
+(* Fonction qui crée le graphe avec comme noeud les elts d'une liste *)
+
+(* Graphe de retour *)
+   (Array.of_list(List.rev (List.fold_left (fun l (n,_) -> n::l) [] extraction_nom)), (algo_ford graph 0 1))
 
 
 (*
