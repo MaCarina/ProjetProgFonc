@@ -17,6 +17,7 @@
    val somme_totale: int list -> int -> int
    (*val recup_name: string -> string list*)
    (*val creation_graphe: string list -> string graph -> string graph*)
+   (*val dette: ... -> string graph*)
    (* Echanges de paiements et recherche du flot de débit de chacun *)
    (*
    val debt : string -> (string array * flow graph)
