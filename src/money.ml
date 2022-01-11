@@ -28,7 +28,7 @@ let lecture fichier =
 
 let extraction_somme liste liste_somme =
    let liste_s = filter (fun x -> x<"9999") liste in
-   liste_s
+   List.map (fun x -> int_of_string x) liste_s
 
 (*Fonction qui récupère tous les noms des personnes impliquées dans le fichier money et les met sous forme de liste*)
 let extraction_nom liste liste_nom =

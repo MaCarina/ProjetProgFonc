@@ -20,7 +20,7 @@ let () =
     let infile = Sys.argv.(1) in
     let lignes = Money.lecture infile in
     let somme = extraction_somme lignes [] in
-    affichage somme;
+    List.map (fun x -> Printf.printf "int : %d, " x) somme;
     let nom = extraction_nom lignes [] in
     Printf.printf "\n";
     affichage nom;
