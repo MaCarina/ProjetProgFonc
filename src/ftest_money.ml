@@ -19,6 +19,11 @@ let () =
 
     let infile = Sys.argv.(1) in
     let lignes = Money.lecture infile in
+    let somme = extraction_somme lignes [] in
+    affichage somme;
+    let nom = extraction_nom lignes [] in
+    Printf.printf "\n";
+    affichage nom;
     (*let h = Money.split lignes [] in
     (*let line = Money.extraction_somme lignes [] in*)
     let chaine = String.concat "," h in

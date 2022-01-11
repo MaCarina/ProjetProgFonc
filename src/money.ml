@@ -7,48 +7,32 @@ open Tools
 open Option
 open Scanf
 
-(*Fonction qui lit dans le fichier money et renvoie la liste des sommes payées*)
-(*let lecture fichier =
-   let channel = open_in fichier in
-   let rec lecture_recursive ligne =
-      try
-         Scanf.fscanf channel "%[^\r\n]\n" (fun x -> lecture_recursive (x :: ligne))
-      with 
-         End_of_file -> ligne
-   in
-   let ligne = lecture_recursive [] in
-   close_in channel;
-   List.rev (List.map int_of_string ligne)*)
-
- let affichage liste =
+let affichage liste =
    List.map (fun x -> Printf.printf "elt : %s, " x) liste
 
+(*Fonction qui lit dans le fichier money et renvoie la liste des sommes payées*)
 let lecture fichier =
    let channel = open_in fichier in
-   try
-      let line = input_line channel in
-      (*let ligne = Str.regexp "\\([A-Za-z]+\\)" in line*)
-      (*print_endline line;*)
-      Printf.printf "%s\n" line;
-      let sub = String.split_on_char ' ' line in (*sub est la liste de chaque elt séparé par un espace dans le fichier*)
-      affichage sub;
-      close_in channel
-   with End_of_file ->
-      close_in channel
-(*
-let rec split liste fin =
-   match liste with
-   |[] -> liste
-   |x::rest -> 
-      let elt = split (regexp "[ \t]+") x in 
-      split rest (elt::fin)
-*)
-let rec extraction_somme liste acu =
-   match liste with
-   |[] -> acu
-   |(_,a)::[] -> extraction_somme [] (a::acu)
-   |(_,b)::rest -> extraction_somme rest (b::acu)
+   let lect sous =
+      try
+         let line = input_line channel in
+         let sous = String.split_on_char ' ' line in (*sub est la liste de chaque elt séparé par un espace dans le fichier*)
+         match sous with
+         |[] -> []
+         |_ -> sous
+      with End_of_file -> sous
+   in
+   let sous = lect [] in
+   close_in channel;
+   sous
 
+let extraction_somme liste liste_somme =
+   let liste_s = filter (fun x -> x<"9999") liste in
+   liste_s
+
+let extraction_nom liste liste_nom =
+   let liste_n = filter (fun x -> (x>"A") && (x<"Z")) liste in
+   liste_n
 
 (*Fonction qui calcule la somme totale payée avec les int d'une liste*)
 let rec somme_totale liste somme =
