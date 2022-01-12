@@ -24,6 +24,9 @@ let () =
     let nom = extraction_nom lignes [] in
     Printf.printf "\n";
     affichage nom;
+    Printf.printf "\n";
+    let calcul = somme_totale somme 0 in
+    Printf.printf "Somme totale : %d\n" calcul;
     (*let h = Money.split lignes [] in
     (*let line = Money.extraction_somme lignes [] in*)
     let chaine = String.concat "," h in
