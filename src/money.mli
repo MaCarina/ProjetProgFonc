@@ -14,9 +14,10 @@
    val lecture: string -> string list
    val extraction_somme: string list -> int list -> int list
    val extraction_nom: string list -> string list -> string list
+   val liste_paire: string list -> int list -> (string * int) list
    val somme_totale: int list -> int -> int
-   (*val recup_name: string -> string list*)
-   (*val creation_graphe: string list -> string graph -> string graph*)
+   val dette: string -> (string * int) list
+   val crea_graphe: string -> string graph
    (*val dette: ... -> string graph*)
    (* Echanges de paiements et recherche du flot de débit de chacun *)
    (*

@@ -35,6 +35,9 @@ let extraction_nom liste liste_nom =
    let liste_n = filter (fun x -> (x>"A") && (x<"Z")) liste in
    liste_n
 
+let liste_paire liste_nom liste_somme =
+   List.combine liste_nom liste_somme
+
 (*Fonction qui calcule la somme totale payée avec les int d'une liste*)
 let rec somme_totale liste somme =
    match liste with
@@ -42,58 +45,36 @@ let rec somme_totale liste somme =
    |a::[] -> somme_totale [] (a+somme)
    |b::rest -> somme_totale rest (b+somme)
    
-
-(*Fonction qui calcule la différence entre ce qui a été payé et ce qui devait être payé pour chacun*)
-(* Fonction qui calcule ce qui devait être payé par chacun *)
-let dette path = (*pas sure du deuxième argument là*)
-   let m = (List.fold_left somme_totale extraction_nom 0)/(List.length extraction_nom) in
-   let dette_perso = List.map (fun (n,d) -> (n,(d-m))) extraction_nom in
+(*Fonction qui calcule ce qui devait être payé par chacun*)
+let dette fichier = 
+   let lignes = lecture fichier in
+   let somme = extraction_somme lignes [] in
+   let nom = extraction_nom lignes [] in
+   let calcul = somme_totale somme 0 in
+   let m = calcul / (List.length somme) in
+   List.map (fun (n,d) -> (n,(d-m))) (liste_paire nom somme)
 
 (*Fonction qui crée le graphe avec comme noeud les elts d'une liste*)
-let rec creation_graphe liste graph =
-   match liste with
-   |[] -> graph
-   |a::[] -> Graph.new_node graph a
-   |b::rest -> creation_graphe rest (Graph.new_node graph b)
+let crea_graphe fichier =
+   let lignes = lecture fichier in
+   let liste = extraction_nom lignes [] in
+   let rec creation_graphe graph num =
+      match num with
+      |0 -> graph
+      |a -> creation_graphe (Graph.new_node graph a) (num-1)
    in
-      ...
+      creation_graphe Graph.empty_graph (List.length liste)
 
+(*Fonction qui crée des arcs de capacité infinie entre chaque noeud*)
+let crea_edge fichier graph =
+   let gr = crea_graphe fichier in
+   Graph.n_fold graph (Graph.new_arc graph )
+(*
 (* Fonction qui crée la source et la destination *)
 let graph = creation_graphe extraction_nom clone_nodes in
 let (extraction_nom, graph) = lecture path graph in
 (* Graphe de retour *)
 (Array.of_list(List.rev (List.fold_left (fun l (n,_) -> n::l) [] extraction_nom)), (algo_ford graph 0 1))
-
-(*Fonction qui crée des arcs de capacité infinie entre chaque noeud*)
+*)
 
 (*Fonction qui change le flot en fonction des remboursements d'argent calculés*)
-
-(*
-let sort_negat ff names debt id1 id2 =
-   match (current_flow debt id1 id2) with
-      | Some c -> if c <= 0 
-         then Printf.fprintf ff ""
-         else Printf.fprintf ff "\"%s\" -> \"%s\" [label = \"%s\"];\n" names.((id1-2)) names.((id2-2)) (string_of_int(c)^"/inf")
-      | None -> Printf.fprintf ff ""
-
-let print_arcs ff names debt id1 id2 lbl =
-   match (id1,id2,lbl) with
-      | 0,n,f -> Printf.fprintf ff "\"source\" -> \"%s\" [label = \"%s\"];\n" names.((n-2)) (string_of_flow f)
-      | n,1,f -> Printf.fprintf ff "\"%s\" -> \"target\" [label = \"%s\"];\n" names.((n-2)) (string_of_flow f)
-      | n1,n2,_ -> sort_negat ff names debt n1 n2
-
-let export_debt (path: string) ((names,debt): (string array * flow graph)) =
-
-  (* Open a write-file. *)
-  let ff = open_out path in
-
-  (* Write in this file. *)
-  Printf.fprintf ff "digraph diagram_out{\n   rankdir=LR;\n   size=\"8,5\"\n   node [shape = circle];\n" ;
-
-  (* Write all arcs *)
-  e_iter debt (print_arcs ff names debt);
-
-  Printf.fprintf ff "\n}" ;
-  
-  close_out ff ;
-  ()*)
