@@ -59,13 +59,20 @@ let rec creation_graphe liste graph =
 (*Fonction qui change le flot en fonction des remboursements d'argent calculés*)
 
 (* Fonction qui calcule ce qui devait être payé par chacun *)
-let dette =
+let dette path = (*pas sure du deuxième argument là*)
 let m = (List.fold_left somme_totale extraction_nom 0)/(List.length extraction_nom) in
 let dette_perso = List.map (fun (n,d) -> (n,(d-m))) extraction_nom in
-(* Fonction qui crée le graphe avec comme noeud les elts d'une liste *)
-
+(* Fonction qui crée le graphe avec comme noeud les elements d'une liste *)
+let rec creation_graphe liste graph =
+   match liste with
+   |[] -> graph
+   |a::[] -> Graph.new_node graph a
+   |b::rest -> creation_graphe rest (Graph.new_node graph b)
+(* Fonction qui crée la source et la destination *)
+let graph = creation_graphe extraction_nom clone_nodes in
+let (extraction_nom, graph) = lecture path graph in
 (* Graphe de retour *)
-   (Array.of_list(List.rev (List.fold_left (fun l (n,_) -> n::l) [] extraction_nom)), (algo_ford graph 0 1))
+(Array.of_list(List.rev (List.fold_left (fun l (n,_) -> n::l) [] extraction_nom)), (algo_ford graph 0 1))
 
 
 (*
