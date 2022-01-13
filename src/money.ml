@@ -8,7 +8,7 @@ open Option
 open Int
 
 let affichage liste =
-   List.map (fun x -> Printf.printf "elt : %s, " x) liste
+   List.map (fun (x,y) -> Printf.printf "elt : %s %d, " x y) liste
 
 (*Fonction qui lit dans le fichier money et renvoie la liste des sommes payées*)
 let lecture fichier =
@@ -75,22 +75,19 @@ let crea_edge fichier =
       |false -> edge (Graph.n_fold graph (fun graph x -> if (x=n) then graph 
                                                          else if (x=0) then graph
                                                          else if (x=4) then graph
-                                                         else Tools.add_arc graph x n Int.max_int) graph) max (n+1)
+                                                         else new_arc graph x n Int.max_int) graph) max (n+1)
       |true -> graph
    in
       edge gr 3 1
 
 (*Fonction qui relie les noeuds à la source et au puit en fonction de leur dette*)
 let link fichier graph n =
-   let lignes = lecture fichier in
-   let somme = extraction_somme lignes [] in
-   let nom = extraction_nom lignes [] in
-   let liste = liste_paire nom somme in
+   let liste = dette fichier in
    let rec link_rec graph a list =
       match list with
       |[] -> graph
-      |(_,s)::rest -> if (s<0) then link_rec (Tools.add_arc graph 4 n (-s)) (n+1) rest
-                     else link_rec (Tools.add_arc graph 0 n s) (n+1) rest
+      |(_,s)::rest -> if (s<0) then link_rec (new_arc graph 4 a (-s)) (a+1) rest
+                     else link_rec (new_arc graph a 0 s) (a+1) rest
    in
       link_rec graph n liste
 (*

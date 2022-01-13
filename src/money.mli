@@ -10,7 +10,7 @@
    open Ford
    
    (**************  ALGORITHM  **************)
-   val affichage: string list -> unit list
+   val affichage: (string * int) list -> unit list
    val lecture: string -> string list
    val extraction_somme: string list -> int list -> int list
    val extraction_nom: string list -> string list -> string list
