@@ -34,6 +34,7 @@ let () =
     *)
     let de = dette infile in
     let graph = crea_edge infile in
+    let graph2 = link infile graph 1 in
     let string_graph = gmap graph string_of_int in
     (*let h = Money.split lignes [] in
     (*let line = Money.extraction_somme lignes [] in*)

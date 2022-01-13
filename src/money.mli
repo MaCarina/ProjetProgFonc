@@ -19,6 +19,7 @@
    val dette: string -> (string * int) list
    val crea_graphe: string -> int graph
    val crea_edge: string -> int graph
+   val link: string -> int graph -> int -> int graph
    (*val dette: ... -> string graph*)
    (* Echanges de paiements et recherche du flot de débit de chacun *)
    (*
