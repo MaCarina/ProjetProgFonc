@@ -20,9 +20,4 @@
    val crea_graphe: string -> int graph
    val crea_edge: string -> int graph
    val link: string -> int graph -> int -> int graph
-   (*val dette: ... -> string graph*)
-   (* Echanges de paiements et recherche du flot de débit de chacun *)
-   (*
-   val debt : string -> (string array * flow graph)
-   (* Export *)
-   val export_debt : string -> (string array * flow graph) -> unit*)
+   val application: string -> int graph -> int graph

@@ -58,8 +58,8 @@ let dette fichier =
 let crea_graphe fichier =
    let lignes = lecture fichier in
    let liste = extraction_nom lignes [] in
-   let graph = new_node empty_graph 0 in (*0 est la source*)
-   let graph2 = new_node graph ((List.length liste)+1) in (*4 est le puit*)
+   let graph = new_node empty_graph ((List.length liste)+1) in (*4 est le puit*)
+   let graph2 = new_node graph 0 in (*0 est la source*)
    let rec creation_graphe graph num =
       match num with
       |0 -> graph
@@ -86,16 +86,13 @@ let link fichier graph n =
    let rec link_rec graph a list =
       match list with
       |[] -> graph
-      |(_,s)::rest -> if (s<0) then link_rec (new_arc graph 4 a (-s)) (a+1) rest
-                     else link_rec (new_arc graph a 0 s) (a+1) rest
+      |(_,s)::rest -> if (s<0) then link_rec (new_arc graph 0 a (-s)) (a+1) rest
+                     else link_rec (new_arc graph a 4 s) (a+1) rest
    in
       link_rec graph n liste
-(*
-(* Fonction qui crée la source et la destination *)
-let graph = creation_graphe extraction_nom clone_nodes in
-let (extraction_nom, graph) = lecture path graph in
-(* Graphe de retour *)
-(Array.of_list(List.rev (List.fold_left (fun l (n,_) -> n::l) [] extraction_nom)), (algo_ford graph 0 1))
-*)
 
-(*Fonction qui change le flot en fonction des remboursements d'argent calculés*)
+(*Fonction qui applique l'algo de ford au graphe créé*)
+let application fichier graph =
+   let algo = algo_ford graph 0 4 in
+   let algo_link = link fichier graph 1 in
+   transfo algo_link algo
