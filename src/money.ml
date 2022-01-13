@@ -69,7 +69,7 @@ let crea_graphe fichier =
 let crea_edge fichier =
    let gr = crea_graphe fichier in
    let rec edge graph max n =
-      match (max=n) with
+      match ((max+1)=n) with
       |false -> edge (Graph.n_fold graph (fun graph x -> if (x=n) then graph else Tools.add_arc graph x n Int.max_int) graph) max (n+1)
       |true -> graph
    in
