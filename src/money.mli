@@ -17,7 +17,8 @@
    val liste_paire: string list -> int list -> (string * int) list
    val somme_totale: int list -> int -> int
    val dette: string -> (string * int) list
-   val crea_graphe: string -> string graph
+   val crea_graphe: string -> int graph
+   val crea_edge: string -> int graph
    (*val dette: ... -> string graph*)
    (* Echanges de paiements et recherche du flot de débit de chacun *)
    (*

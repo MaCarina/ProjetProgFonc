@@ -5,7 +5,7 @@ open String
 open Gfile
 open Tools
 open Option
-open Scanf
+open Int
 
 let affichage liste =
    List.map (fun x -> Printf.printf "elt : %s, " x) liste
@@ -66,9 +66,14 @@ let crea_graphe fichier =
       creation_graphe Graph.empty_graph (List.length liste)
 
 (*Fonction qui crée des arcs de capacité infinie entre chaque noeud*)
-let crea_edge fichier graph =
+let crea_edge fichier =
    let gr = crea_graphe fichier in
-   Graph.n_fold graph (Graph.new_arc graph )
+   let rec edge graph max n =
+      match (max=n) with
+      |false -> edge (Graph.n_fold graph (fun graph x -> if (x=n) then graph else Tools.add_arc graph x n Int.max_int) graph) max (n+1)
+      |true -> graph
+   in
+      edge gr 3 1
 (*
 (* Fonction qui crée la source et la destination *)
 let graph = creation_graphe extraction_nom clone_nodes in

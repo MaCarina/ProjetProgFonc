@@ -33,7 +33,8 @@ let () =
     Printf.printf "Somme totale : %d\n" calcul;
     *)
     let de = dette infile in
-    let graph = crea_graphe infile in
+    let graph = crea_edge infile in
+    let string_graph = gmap graph string_of_int in
     (*let h = Money.split lignes [] in
     (*let line = Money.extraction_somme lignes [] in*)
     let chaine = String.concat "," h in
@@ -41,5 +42,5 @@ let () =
     (*let liste = [10;10;40] in
     let somme = somme_totale liste 0 in
     Printf.printf "la somme est : %d" somme;*)
-    let () = write_file outfile graph in
+    let () = write_file outfile string_graph in
     ();
